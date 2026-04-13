@@ -12,7 +12,7 @@ from typing import Optional
 from pydantic import BaseModel, Field, ConfigDict
 from mcp.server.fastmcp import FastMCP
 
-mcp = FastMCP("g2b_price_mcp")
+mcp = FastMCP("g2b_price_mcp", host="0.0.0.0", port=8000)
 
 API_BASE_URL = "https://apis.data.go.kr/1230000/ao/PriceInfoService"
 SERVICE_KEY = os.environ.get("G2B_SERVICE_KEY", "")
@@ -188,19 +188,5 @@ async def t11(p: S) -> str:
 
 # ASGI app for uvicorn
 
-sse = mcp.sse_app()
-
-from starlette.middleware import Middleware
-from starlette.middleware.trustedhost import TrustedHostMiddleware
-from starlette.applications import Starlette
-
-app = Starlette(
-    routes=sse.routes,
-    middleware=[
-        Middleware(TrustedHostMiddleware, allowed_hosts=["*"]),
-    ],
-)
-
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    mcp.run(transport="sse")
