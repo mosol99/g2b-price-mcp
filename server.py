@@ -1,3 +1,5 @@
+import os
+os.environ["UVICORN_HOST"] = "0.0.0.0"
 """
 나라장터 가격정보현황서비스 MCP Server
 ======================================
@@ -434,4 +436,4 @@ async def search_work_type(params: WorkTypeInput) -> str:
 
 # ─── 서버 실행 ─────────────────────────────────────────────
 if __name__ == "__main__":
-    mcp.run(transport="sse", host="0.0.0.0", port=8000)
+    mcp.run(transport="sse")
