@@ -7,9 +7,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY server.py .
 
-# 환경변수: G2B_SERVICE_KEY를 배포 시 설정
 ENV G2B_SERVICE_KEY=""
+ENV HOST=0.0.0.0
+ENV PORT=8000
 
 EXPOSE 8000
 
-CMD ["python", "server.py"]
+CMD ["python", "-m", "uvicorn", "server:mcp.sse.app", "--host", "0.0.0.0", "--port", "8000"]
