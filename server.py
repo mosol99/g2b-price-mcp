@@ -188,14 +188,7 @@ async def t11(p: S) -> str:
 
 # ASGI app for uvicorn
 
-from starlette.applications import Starlette
-from starlette.routing import Mount, Route
-
-app = Starlette(
-    routes=[
-        Mount("/", app=mcp.sse_app()),
-    ]
-)
+app = mcp.sse_app()
 
 if __name__ == "__main__":
     import uvicorn
