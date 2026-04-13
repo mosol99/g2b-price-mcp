@@ -11,4 +11,4 @@ ENV G2B_SERVICE_KEY=""
 
 EXPOSE 8000
 
-CMD ["python", "server.py"]
+CMD ["python", "-m", "uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]
