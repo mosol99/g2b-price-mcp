@@ -188,7 +188,18 @@ async def t11(p: S) -> str:
 
 # ASGI app for uvicorn
 
-app = mcp.sse_app()
+sse = mcp.sse_app()
+
+from starlette.middleware import Middleware
+from starlette.middleware.trustedhost import TrustedHostMiddleware
+from starlette.applications import Starlette
+
+app = Starlette(
+    routes=sse.routes,
+    middleware=[
+        Middleware(TrustedHostMiddleware, allowed_hosts=["*"]),
+    ],
+)
 
 if __name__ == "__main__":
     import uvicorn
