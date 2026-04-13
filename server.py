@@ -185,5 +185,8 @@ async def t11(p: S) -> str:
         return _fmt(i, t, "자원분류") if i else "검색 결과 없음"
     except Exception as e: return str(e)
 
+# ASGI app for uvicorn
+app = mcp.sse_app()
+
 if __name__ == "__main__":
     mcp.run(transport="sse")
