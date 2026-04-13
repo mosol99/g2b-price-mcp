@@ -1,0 +1,19 @@
+# fly.toml - Fly.io 배포 설정
+# 배포 명령: fly launch → fly secrets set G2B_SERVICE_KEY="인증키" → fly deploy
+
+app = "g2b-price-mcp"
+primary_region = "nrt"  # 도쿄 (한국에서 가장 가까운 Fly.io 리전)
+
+[build]
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1
