@@ -1,5 +1,6 @@
 import os
-os.environ["UVICORN_HOST"] = "0.0.0.0"
+os.environ["FASTMCP_HOST"] = "0.0.0.0"
+os.environ["FASTMCP_PORT"] = "8000"
 """
 나라장터 가격정보현황서비스 MCP Server
 End Point: https://apis.data.go.kr/1230000/ao/PriceInfoService
@@ -186,7 +187,6 @@ async def t11(p: S) -> str:
     except Exception as e: return str(e)
 
 # ASGI app for uvicorn
-app = mcp.sse_app()
 
 if __name__ == "__main__":
     mcp.run(transport="sse")
