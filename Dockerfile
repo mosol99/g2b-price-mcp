@@ -13,4 +13,4 @@ ENV PORT=8000
 
 EXPOSE 8000
 
-CMD ["python", "-m", "uvicorn", "server:mcp.sse.app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "uvicorn", "server:mcp._mcp_server.sse.app", "--host", "0.0.0.0", "--port", "8000"]
